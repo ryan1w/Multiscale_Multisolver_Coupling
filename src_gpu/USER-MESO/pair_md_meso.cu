@@ -96,6 +96,9 @@ void MesoPairMD::prepare_coeff()
             coeff_table[ cid * n_coeff + p_offset] = offset[i][j];
         }
     }
+
+    dev_coefficients.upload( &coeff_table[0], coeff_table.size(), meso_device->stream() );
+    coeff_ready = true;
 }
 
 template<int evflag>
